@@ -11,7 +11,12 @@ import { Component, computed, input, signal, OnInit, OnDestroy, booleanAttribute
   template: `
     <div class="loading-container" [class.with-container]="withContainer()">
       <svg class="loader" [style.transform]="rotationTransform()" [style.width.px]="diameter()" [style.height.px]="diameter()" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path [attr.d]="currentPath()" fill="currentColor" />
+        <defs>
+          <filter id="softEdge" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" />
+          </filter>
+        </defs>
+        <path [attr.d]="currentPath()" fill="currentColor" filter="url(#softEdge)" />
       </svg>
     </div>
   `,
@@ -48,20 +53,20 @@ export class LoadingIndicatorComponent implements OnInit, OnDestroy {
 
   // Shapes: each defines radius for all 20 points + curve factor
   private readonly shapes = [
-    // Shape 1: Wavy circle (creux prononcés)
-    { radii: this.createWavyRadii(42, 28), curve: 0.35 },
+    // Shape 1: Wavy circle (ondulations douces)
+    { radii: this.createWavyRadii(40, 32), curve: 0.5 },
     // Shape 2: Soft burst arrondi
-    { radii: this.createWavyRadii(40, 34), curve: 0.45 },
+    { radii: this.createWavyRadii(40, 35), curve: 0.55 },
     // Shape 3: Pentagon arrondi (5 sommets)
-    { radii: this.createPentagonRadii(40), curve: 0.25 },
-    // Shape 4: Pill/Ovale vertical (buffer avec bouts arrondis)
-    { radii: this.createPillRadii(42, 36), curve: 0.7 },
-    // Shape 5: Sunny (8 ondulations douces, presque un cercle)
-    { radii: this.createSunnyRadii(42, 34), curve: 0.5 },
-    // Shape 6: 4-side cookie (8 sommets: 4 convexes + 4 concaves)
-    { radii: this.createCookieRadii(43, 34), curve: 0.45 },
-    // Shape 7: Ovale horizontal (ellipse aplatie)
-    { radii: this.createOvalRadii(46, 30), curve: 0.45 },
+    { radii: this.createPentagonRadii(38), curve: 0.4 },
+    // Shape 4: Pill/Ovale vertical
+    { radii: this.createPillRadii(40, 35), curve: 0.6 },
+    // Shape 5: Sunny (8 ondulations douces)
+    { radii: this.createSunnyRadii(40, 35), curve: 0.55 },
+    // Shape 6: 4-side cookie (4 lobes doux)
+    { radii: this.createCookieRadii(40, 35), curve: 0.55 },
+    // Shape 7: Ovale horizontal
+    { radii: this.createOvalRadii(42, 34), curve: 0.55 },
   ];
 
   // Helper: create wavy radii (alternating outer/inner)
