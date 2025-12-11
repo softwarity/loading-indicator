@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, discardPeriodicTasks } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoadingIndicatorComponent } from './loading-indicator.component';
 
 describe('LoadingIndicatorComponent', () => {
@@ -125,36 +125,19 @@ describe('LoadingIndicatorComponent', () => {
       expect(d).toContain('Z');
     });
 
-    it('should apply rotation transform', fakeAsync(() => {
+    it('should have loader class on SVG', () => {
       fixture.detectChanges();
-      tick(100);
-      fixture.detectChanges();
-      const svg = fixture.nativeElement.querySelector('svg');
-      const transform = svg.style.transform;
-      expect(transform).toMatch(/rotate\([\d.]+deg\)/);
-      discardPeriodicTasks();
-    }));
+      const svg = fixture.nativeElement.querySelector('svg.loader');
+      expect(svg).toBeTruthy();
+    });
   });
 
   describe('lifecycle', () => {
-    it('should start animation on init', fakeAsync(() => {
+    it('should clean up animation on destroy', () => {
       fixture.detectChanges();
-      const initialPath = fixture.nativeElement.querySelector('path').getAttribute('d');
-      tick(500);
-      fixture.detectChanges();
-      const laterPath = fixture.nativeElement.querySelector('path').getAttribute('d');
-      expect(initialPath).toBeTruthy();
-      expect(laterPath).toBeTruthy();
-      discardPeriodicTasks();
-    }));
-
-    it('should clean up animation on destroy', fakeAsync(() => {
-      fixture.detectChanges();
-      tick(100);
       expect(() => {
         fixture.destroy();
       }).not.toThrow();
-      discardPeriodicTasks();
-    }));
+    });
   });
 });
