@@ -1,0 +1,41 @@
+<section class="playground">
+  <h2>Playground</h2>
+
+  <!-- Interactive index.html fragment with color scheme toggle -->
+  <pre class="fake-prism html-fragment"><code><span class="token comment">&lt;!-- index.html --&gt;</span>
+<span class="token tag">&lt;body</span> <span class="token attr-name">class</span>=<span class="token attr-value">"{{ isDarkMode() ? 'dark-mode' : '' }}"</span><span class="token tag">&gt;</span>
+  <span class="token comment">...</span>
+<span class="token tag">&lt;/body&gt;</span></code><button class="color-scheme-toggle" (click)="toggleColorScheme()" [title]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">@if (isDarkMode()) {<mat-icon>light_mode</mat-icon>} @else {<mat-icon>dark_mode</mat-icon>}</button></pre>
+
+  <!-- Interactive HTML Code for loading-indicator -->
+  <pre class="fake-prism html-fragment"><code><span class="token comment">&lt;!-- your-component.html --&gt;</span>
+<span class="token tag">&lt;loading-indicator</span>
+  <span class="token attr-name">[diameter]</span>=<span class="token attr-value">"</span><select class="inline-select" [value]="selectedDiameter()" (change)="onDiameterChange(+$any($event.target).value)">@for (d of diameters; track d) {<option [value]="d">{{ d }}</option>}</select><span class="token attr-value">"</span>
+  <label class="inline-bool"><input type="checkbox" [checked]="withContainer()" (change)="toggleWithContainer()"><span class="token attr-name" [class.disabled]="!withContainer()">withContainer</span></label>
+<span class="token tag">/&gt;</span></code></pre>
+
+  <!-- Live preview -->
+  <div class="preview-container">
+    <div class="preview-box">
+      <loading-indicator [diameter]="selectedDiameter()" [withContainer]="withContainer()" />
+    </div>
+  </div>
+
+  <!-- Interactive SCSS Code -->
+  <pre class="fake-prism"><code><span class="token comment">// In styles.scss</span>
+<span class="token keyword">&#64;use</span> <span class="token string">'&#64;angular/material'</span> <span class="token keyword">as</span> mat<span class="token punctuation">;</span>
+<span class="token keyword">&#64;use</span> <span class="token string">'&#64;softwarity/loading-indicator/loading-indicator-theme'</span> <span class="token keyword">as</span> loading-indicator<span class="token punctuation">;</span>
+
+<span class="token selector">html</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">color-scheme</span><span class="token punctuation">:</span> light<span class="token punctuation">;</span>
+  <span class="token keyword">&#64;include</span> <span class="token string">mat.</span><span class="token function">theme</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token property">color</span><span class="token punctuation">:</span> <span class="token string">mat.$</span><select class="inline-select" [value]="selectedPalette()" (change)="onPaletteChange($any($event.target).value)"><option value="">violet</option>@for (p of palettes; track p) {<option [value]="p">{{ p }}</option>}</select><span class="token string">-palette</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token selector">&amp; body.dark-mode</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color-scheme</span><span class="token punctuation">:</span> dark<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">&#64;include</span> loading-indicator.<span class="token function">overrides</span><span class="token punctuation">(</span><span class="token punctuation">(</span>
+<span class="override-line" [class.disabled]="!backgroundOverride().enabled"><input type="checkbox" [checked]="backgroundOverride().enabled" (change)="toggleOverride('background')"><span class="token comment" [hidden]="backgroundOverride().enabled">// </span><span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">light-dark</span><span class="token punctuation">(</span><label class="inline-color"><input type="color" [value]="backgroundOverride().light" (input)="updateOverrideColor('background', 'light', $event)"><span class="color-preview" [style.background]="backgroundOverride().light"></span><span class="token string">{{ backgroundOverride().light }}</span></label><span class="token punctuation">,</span> <label class="inline-color"><input type="color" [value]="backgroundOverride().dark" (input)="updateOverrideColor('background', 'dark', $event)"><span class="color-preview" [style.background]="backgroundOverride().dark"></span><span class="token string">{{ backgroundOverride().dark }}</span></label><span class="token punctuation">),</span></span>
+<span class="override-line" [class.disabled]="!shapeOverride().enabled"><input type="checkbox" [checked]="shapeOverride().enabled" (change)="toggleOverride('shape')"><span class="token comment" [hidden]="shapeOverride().enabled">// </span><span class="token property">shape-color</span><span class="token punctuation">:</span> <span class="token function">light-dark</span><span class="token punctuation">(</span><label class="inline-color"><input type="color" [value]="shapeOverride().light" (input)="updateOverrideColor('shape', 'light', $event)"><span class="color-preview" [style.background]="shapeOverride().light"></span><span class="token string">{{ shapeOverride().light }}</span></label><span class="token punctuation">,</span> <label class="inline-color"><input type="color" [value]="shapeOverride().dark" (input)="updateOverrideColor('shape', 'dark', $event)"><span class="color-preview" [style.background]="shapeOverride().dark"></span><span class="token string">{{ shapeOverride().dark }}</span></label><span class="token punctuation">)</span></span>  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+</section>

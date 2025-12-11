@@ -1,0 +1,171 @@
+<section class="documentation">
+  <h2>Documentation</h2>
+
+  <!-- Installation -->
+  <article class="doc-section">
+    <h3>Installation</h3>
+    <pre><code><span class="token function">npm</span> install &#64;softwarity/loading-indicator</code></pre>
+  </article>
+
+  <!-- Usage -->
+  <article class="doc-section">
+    <h3>Usage</h3>
+    <p>Import the component and use it in your template:</p>
+    <pre><code><span class="token comment">// In your component</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> LoadingIndicatorComponent <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'&#64;softwarity/loading-indicator'</span><span class="token punctuation">;</span>
+
+<span class="token decorator">&#64;Component</span><span class="token punctuation">(&#123;</span>
+  <span class="token property">imports</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>LoadingIndicatorComponent<span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token comment">...</span>
+<span class="token punctuation">&#125;)</span></code></pre>
+
+    <pre><code><span class="token comment">&lt;!-- Basic usage --&gt;</span>
+<span class="token tag">&lt;loading-indicator</span> <span class="token tag">/&gt;</span>
+
+<span class="token comment">&lt;!-- With custom diameter --&gt;</span>
+<span class="token tag">&lt;loading-indicator</span> <span class="token attr-name">[diameter]</span>=<span class="token attr-value">"96"</span> <span class="token tag">/&gt;</span>
+
+<span class="token comment">&lt;!-- With container background --&gt;</span>
+<span class="token tag">&lt;loading-indicator</span> <span class="token attr-name">withContainer</span> <span class="token tag">/&gt;</span>
+
+<span class="token comment">&lt;!-- Combined --&gt;</span>
+<span class="token tag">&lt;loading-indicator</span> <span class="token attr-name">[diameter]</span>=<span class="token attr-value">"64"</span> <span class="token attr-name">withContainer</span> <span class="token tag">/&gt;</span></code></pre>
+  </article>
+
+  <!-- API -->
+  <article class="doc-section">
+    <h3>API</h3>
+    <div class="api-table-wrapper">
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>diameter</code></td>
+            <td><code>number</code></td>
+            <td><code>48</code></td>
+            <td>Size of the loading indicator in pixels</td>
+          </tr>
+          <tr>
+            <td><code>withContainer</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>When true, displays a circular background container behind the shape</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <!-- Features -->
+  <article class="doc-section">
+    <h3>Features</h3>
+    <ul class="feature-list">
+      <li><strong><a href="https://m3.material.io/components/loading-indicator/overview" target="_blank">Material 3 Expressive Design</a></strong> - Smooth morphing animation between 7 organic shapes</li>
+      <li><strong>60fps Animation</strong> - Uses requestAnimationFrame for butter-smooth performance</li>
+      <li><strong>Responsive to Theme</strong> - Automatically adapts to light/dark color schemes</li>
+      <li><strong>Standalone Component</strong> - No module import required, just import and use</li>
+      <li><strong>Lightweight</strong> - Pure SVG animation, no external dependencies</li>
+    </ul>
+  </article>
+
+  <!-- Theming -->
+  <article class="doc-section">
+    <h3>Theming (Material 3)</h3>
+    <p>The component provides a SCSS mixin to customize the colors. This approach follows Angular Material's theming pattern.</p>
+    <p>In your application's <code>styles.scss</code>, import the theme file and call the <code>overrides</code> mixin:</p>
+    <pre><code><span class="token keyword">&#64;use</span> <span class="token string">'&#64;angular/material'</span> <span class="token keyword">as</span> mat<span class="token punctuation">;</span>
+<span class="token keyword">&#64;use</span> <span class="token string">'&#64;softwarity/loading-indicator/loading-indicator-theme'</span> <span class="token keyword">as</span> loading-indicator<span class="token punctuation">;</span>
+
+<span class="token comment">// Your Material 3 theme</span>
+<span class="token selector">html</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">&#64;include</span> mat.<span class="token function">theme</span><span class="token punctuation">((</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
+      <span class="token property">primary</span><span class="token punctuation">:</span> mat.<span class="token variable">$violet-palette</span><span class="token punctuation">,</span>
+      <span class="token property">tertiary</span><span class="token punctuation">:</span> mat.<span class="token variable">$yellow-palette</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">))</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Optional: customize loading indicator colors</span>
+  <span class="token comment">// &#64;include loading-indicator.overrides();</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+    <h4>Customization</h4>
+    <p>The <code>overrides</code> mixin accepts a map of tokens to customize the appearance:</p>
+    <div class="api-table-wrapper">
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>background-color</code></td>
+            <td><code>var(--mat-sys-primary-container)</code></td>
+            <td>Background color when withContainer is true</td>
+          </tr>
+          <tr>
+            <td><code>shape-color</code></td>
+            <td><code>var(--mat-sys-on-secondary-container)</code></td>
+            <td>Color of the animated shape</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Examples</h4>
+    <pre><code><span class="token comment">// Customize colors with light/dark support</span>
+<span class="token keyword">&#64;include</span> loading-indicator.<span class="token function">overrides</span><span class="token punctuation">((</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">light-dark</span><span class="token punctuation">(</span><span class="token string">#e8def8</span><span class="token punctuation">,</span> <span class="token string">#4a4458</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token property">shape-color</span><span class="token punctuation">:</span> <span class="token function">light-dark</span><span class="token punctuation">(</span><span class="token string">#6750a4</span><span class="token punctuation">,</span> <span class="token string">#ccc2dc</span><span class="token punctuation">)</span>
+<span class="token punctuation">))</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Use Material 3 system colors</span>
+<span class="token keyword">&#64;include</span> loading-indicator.<span class="token function">overrides</span><span class="token punctuation">((</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span><span class="token variable">--mat-sys-tertiary-container</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token property">shape-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span><span class="token variable">--mat-sys-on-tertiary-container</span><span class="token punctuation">)</span>
+<span class="token punctuation">))</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Custom brand colors</span>
+<span class="token keyword">&#64;include</span> loading-indicator.<span class="token function">overrides</span><span class="token punctuation">((</span>
+  <span class="token property">shape-color</span><span class="token punctuation">:</span> <span class="token string">#ff5722</span>
+<span class="token punctuation">))</span><span class="token punctuation">;</span></code></pre>
+  </article>
+
+  <!-- Usage Examples -->
+  <article class="doc-section">
+    <h3>Usage Examples</h3>
+    <p>The loading indicator can be used in various contexts:</p>
+    <pre ngNonBindable><code><span class="token comment">&lt;!-- With &#64;defer - placeholder while loading heavy component --&gt;</span>
+&#64;defer (on idle) &#123;
+  <span class="token tag">&lt;app-heavy-component</span> <span class="token tag">/&gt;</span>
+&#125; &#64;placeholder (minimum 500ms) &#123;
+  <span class="token tag">&lt;div</span> <span class="token attr-name">class</span>=<span class="token attr-value">"loading-placeholder"</span><span class="token tag">&gt;</span>
+    <span class="token tag">&lt;loading-indicator</span> <span class="token attr-name">[diameter]</span>=<span class="token attr-value">"64"</span> <span class="token attr-name">withContainer</span> <span class="token tag">/&gt;</span>
+  <span class="token tag">&lt;/div&gt;</span>
+&#125;
+
+<span class="token comment">&lt;!-- Centered in a container --&gt;</span>
+<span class="token tag">&lt;div</span> <span class="token attr-name">class</span>=<span class="token attr-value">"loading-overlay"</span><span class="token tag">&gt;</span>
+  <span class="token tag">&lt;loading-indicator</span> <span class="token attr-name">[diameter]</span>=<span class="token attr-value">"64"</span> <span class="token attr-name">withContainer</span> <span class="token tag">/&gt;</span>
+<span class="token tag">&lt;/div&gt;</span>
+
+<span class="token comment">&lt;!-- Inline in a button --&gt;</span>
+<span class="token tag">&lt;button</span> <span class="token attr-name">[disabled]</span>=<span class="token attr-value">"isLoading"</span><span class="token tag">&gt;</span>
+  &#64;if (isLoading) &#123;
+    <span class="token tag">&lt;loading-indicator</span> <span class="token attr-name">[diameter]</span>=<span class="token attr-value">"24"</span> <span class="token tag">/&gt;</span>
+  &#125; &#64;else &#123;
+    Submit
+  &#125;
+<span class="token tag">&lt;/button&gt;</span></code></pre>
+  </article>
+</section>
