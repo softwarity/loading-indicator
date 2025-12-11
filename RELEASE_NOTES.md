@@ -33,7 +33,5 @@ Customize via SCSS mixin:
 ### Requirements
 
 - Angular >= 21.0.0
-- Angular Material >= 21.0.0
-- Angular CDK >= 21.0.0
 
 ---
