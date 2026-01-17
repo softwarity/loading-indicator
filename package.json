@@ -38,6 +38,7 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
+    "@softwarity/interactive-code": "^1.0.2",
     "@angular/animations": "^21.0.3",
     "@angular/build": "^21.0.2",
     "@angular/cdk": "^21.0.2",

@@ -4,6 +4,64 @@
 
 .playground {
   margin-bottom: 32px;
+
+  interactive-code {
+    display: block;
+    margin: 1rem 0;
+
+    &.inline-code {
+      margin-top: 0;
+    }
+  }
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  margin-top: 1rem;
+
+  span {
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  + interactive-code {
+    margin-top: 0;
+
+    &::part(pre) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+.color-scheme-toggle {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .preview-container {
@@ -21,152 +79,5 @@
     background: var(--mat-sys-surface-container);
     border-radius: 16px;
     border: 1px solid var(--mat-sys-outline-variant);
-  }
-}
-
-// Fake PrismJS interactive code block
-.fake-prism {
-  position: relative;
-
-  // HTML fragment with toggle button in top-right corner
-  &.html-fragment {
-    .color-scheme-toggle {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 4px;
-      padding: 4px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ccc;
-
-      &:hover {
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      mat-icon {
-        font-size: 20px;
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-
-  // Inline select (for diameter, palette)
-  .inline-select {
-    display: inline;
-    font-family: 'Courier New', Consolas, monospace;
-    font-size: inherit;
-    color: #7ec699;
-    background: transparent;
-    border: none;
-    border-bottom: 1px dashed #7ec699;
-    cursor: pointer;
-    padding: 0;
-
-    option {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-  }
-
-  // Inline boolean (checkbox + attribute text)
-  .inline-bool {
-    cursor: pointer;
-    margin-left: 8px;
-
-    input[type="checkbox"] {
-      display: none;
-    }
-
-    .token.attr-name {
-      border-bottom: 1px dashed #f8c555;
-
-      &.disabled {
-        color: #999;
-        text-decoration: line-through;
-      }
-    }
-  }
-
-  // Override lines with checkbox and color pickers
-  .override-line {
-    display: flex;
-    align-items: center;
-    padding-left: 16px;
-
-    input[type="checkbox"] {
-      margin-right: 4px;
-      cursor: pointer;
-      accent-color: var(--accent-purple);
-    }
-
-    // When disabled (commented out), gray out the whole line
-    &.disabled {
-      .token, .inline-color .token, select {
-        color: #999 !important;
-      }
-      .color-preview {
-        opacity: 0.5;
-      }
-    }
-  }
-
-  // Inline color picker
-  .inline-color {
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    margin: 0 2px;
-
-    input[type="color"] {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .color-preview {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border-radius: 3px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      vertical-align: middle;
-    }
-  }
-}
-
-// @defer demo section
-.defer-demo {
-  margin-top: 1.5rem;
-
-  p {
-    margin-bottom: 0.5rem;
-    color: var(--mat-sys-on-surface-variant);
-    font-size: 0.875rem;
-  }
-
-  .defer-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 120px;
-    padding: 24px;
-    background: var(--mat-sys-surface-container);
-    border-radius: 16px;
-    border: 1px solid var(--mat-sys-outline-variant);
-
-    .deferred-content {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--mat-sys-on-surface);
-    }
   }
 }
